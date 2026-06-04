@@ -1,140 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>camel official</title>
+  <meta charset="UTF-8">
+  <title>Camel Generator</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: white;
-            overflow: hidden;
-        }
+  <link rel="stylesheet" href="https://unpkg.com/7.css">
 
-        h1 {
-            font-size: 48px;
-        }
-
-        #mainCamel {
-            width: 300px;
-        }
-
-        button {
-            font-size: 24px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        #camelContainer img {
-            width: 100px;
-            margin: 4px;
-        }
-
-        .camel-window {
-            position: absolute;
-            width: 250px;
-            background: #c0c0c0;
-            border: 2px solid black;
-            box-shadow: 4px 4px 0 black;
-            z-index: 100;
-        }
-
-        .titlebar {
-            background: navy;
-            color: white;
-            text-align: left;
-            padding: 3px;
-            font-weight: bold;
-        }
-
-        .window-content {
-            padding: 10px;
-            text-align: center;
-        }
-
-        .window-content img {
-            width: 120px;
-        }
-    </style>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<h1>camel official</h1>
+  <h1>🐫 Camel Generator</h1>
 
-<img id="mainCamel" src="camel.png">
+  <button id="spawnBtn">Generate Camel</button>
 
-<br><br>
+  <div id="counter">Camels: 0</div>
 
-<button onclick="camelClick()">camel</button>
+  <div id="camelArea"></div>
 
-<p>Camels: <span id="count">0</span></p>
+  <div id="windowArea"></div>
 
-<div id="camelContainer"></div>
+  <audio id="sound" src="sound.mp3" loop></audio>
 
-<script>
-
-let camelCount = 0;
-
-function camelClick() {
-
-    camelCount++;
-
-    document.getElementById("count").textContent = camelCount;
-
-    const camel = document.createElement("img");
-    camel.src = "camel.png";
-
-    document.getElementById("camelContainer")
-        .appendChild(camel);
-
-    if (camelCount >= 20) {
-
-        createCamelWindow();
-
-        if (camelCount >= 40)
-            createCamelWindow();
-
-        if (camelCount >= 60)
-            createCamelWindow();
-
-        if (camelCount >= 80)
-            createCamelWindow();
-
-        if (camelCount >= 100)
-            createCamelWindow();
-    }
-}
-
-function createCamelWindow() {
-
-    const win = document.createElement("div");
-
-    win.className = "camel-window";
-
-    win.style.left =
-        Math.random() *
-        (window.innerWidth - 260) + "px";
-
-    win.style.top =
-        Math.random() *
-        (window.innerHeight - 180) + "px";
-
-    win.innerHTML = `
-        <div class="titlebar">
-            Camel
-        </div>
-
-        <div class="window-content">
-            <img src="camel.png">
-            <p>camel</p>
-        </div>
-    `;
-
-    document.body.appendChild(win);
-}
-
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
