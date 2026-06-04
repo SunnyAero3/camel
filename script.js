@@ -7,7 +7,7 @@ const counter = document.getElementById("counter");
 const windowArea = document.getElementById("windowArea");
 const sound = document.getElementById("sound");
 
-// 🐫 camel button
+// 🐫 camel generator
 btn.onclick = () => {
   spawnCamel();
 
@@ -23,8 +23,6 @@ btn.onclick = () => {
 function spawnCamel() {
   const img = document.createElement("img");
   img.src = "camel.png";
-  img.style.width = "60px";
-
   area.appendChild(img);
 }
 
@@ -32,25 +30,21 @@ function spawnCamel() {
 function activateVirusMode() {
   virusMode = true;
 
-  // 🔊 stable sound
   sound.volume = 0.6;
   sound.loop = true;
   sound.play();
 
-  // 🪟 spawn loop
   setInterval(() => {
     spawnWindow();
   }, 700);
 }
 
-// 🪟 window spawn (FIXED DRAG VERSION)
+// 🪟 popup windows
 function spawnWindow() {
   const win = document.createElement("div");
   win.className = "window active";
 
   win.style.position = "absolute";
-
-  // ✅ FIX: pixel positioning (required for dragging)
   win.style.left = Math.random() * (window.innerWidth - 250) + "px";
   win.style.top = Math.random() * (window.innerHeight - 200) + "px";
 
@@ -70,7 +64,7 @@ function spawnWindow() {
 
   const closeBtn = win.querySelector("button");
 
-  // 💥 close = spawn 6 more
+  // 💥 close = +6 windows
   closeBtn.onclick = () => {
     win.remove();
 
@@ -84,7 +78,7 @@ function spawnWindow() {
   enableDrag(win);
 }
 
-// 🖱️ FIXED DRAG SYSTEM (NOW WORKS)
+// 🖱️ draggable windows
 function enableDrag(el) {
   const titleBar = el.querySelector(".title-bar");
 
@@ -94,26 +88,25 @@ function enableDrag(el) {
 
   titleBar.style.cursor = "grab";
 
-  titleBar.addEventListener("mousedown", (e) => {
+  titleBar.onmousedown = (e) => {
     isDragging = true;
 
     const rect = el.getBoundingClientRect();
-
     offsetX = e.clientX - rect.left;
     offsetY = e.clientY - rect.top;
 
     titleBar.style.cursor = "grabbing";
-  });
+  };
 
-  document.addEventListener("mouseup", () => {
+  document.onmouseup = () => {
     isDragging = false;
     titleBar.style.cursor = "grab";
-  });
+  };
 
-  document.addEventListener("mousemove", (e) => {
+  document.onmousemove = (e) => {
     if (!isDragging) return;
 
     el.style.left = (e.clientX - offsetX) + "px";
     el.style.top = (e.clientY - offsetY) + "px";
-  });
+  };
 }
