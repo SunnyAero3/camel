@@ -43,7 +43,7 @@ function spawnCamel() {
 function activateVirusMode() {
   virusMode = true;
 
-  sound.volume = 0.6;
+  sound.volume = 0.5;
   sound.loop = true;
   sound.play();
 
