@@ -1,15 +1,28 @@
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  background: #eaeaea;
-  overflow-x: hidden;
+  margin: 0;
+  overflow: hidden;
+
+  background: url("background.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
+/* 🪟 CENTER FLOAT UI WINDOW */
+#uiWindow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  z-index: 9999;
+}
+
+/* 🐫 CAMELS */
 #camelArea img {
   width: 60px;
-  margin: 5px;
+  position: absolute;
 }
 
+/* 🪟 WINDOW LAYER */
 #windowArea {
   position: fixed;
   top: 0;
@@ -21,5 +34,22 @@ body {
 
 .window {
   pointer-events: auto;
-  position: absolute;
+
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+
+  border-radius: 8px;
+}
+
+.title-bar {
+  background: linear-gradient(
+    to bottom,
+    rgba(120, 180, 255, 0.9),
+    rgba(60, 120, 220, 0.9)
+  );
+  color: white;
 }
