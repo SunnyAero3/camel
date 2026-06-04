@@ -5,7 +5,7 @@ const btn = document.getElementById("spawnBtn");
 const counter = document.getElementById("counter");
 const sound = document.getElementById("sound");
 
-// 🐫 camel spawn button
+// 🐫 generate camel
 btn.onclick = () => {
   spawnCamel();
 
@@ -17,13 +17,24 @@ btn.onclick = () => {
   }
 };
 
-// 🐫 camel spawn
+// 🐫 FAST camel spawn (NO onload, NO delay, NO issues)
 function spawnCamel() {
   const img = document.createElement("img");
   img.src = "camel.png";
 
+  // 🧠 instant position
+  img.style.position = "absolute";
   img.style.left = Math.random() * window.innerWidth + "px";
   img.style.top = (120 + Math.random() * (window.innerHeight - 120)) + "px";
+
+  // 🔒 HARD SIZE LOCK (instant, no waiting)
+  img.setAttribute("width", "60");
+  img.setAttribute("height", "auto");
+
+  img.style.width = "60px";
+  img.style.height = "auto";
+  img.style.maxWidth = "60px";
+  img.style.maxHeight = "60px";
 
   document.body.appendChild(img);
 }
@@ -41,7 +52,7 @@ function activateVirusMode() {
   }, 700);
 }
 
-// 🪟 windows
+// 🪟 spawn window
 function spawnWindow() {
   const win = document.createElement("div");
   win.className = "window active";
@@ -79,7 +90,7 @@ function spawnWindow() {
   enableDrag(win);
 }
 
-// 🖱️ drag system (still needed)
+// 🖱️ drag system
 function enableDrag(el) {
   const titleBar = el.querySelector(".title-bar");
 
