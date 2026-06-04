@@ -28,13 +28,13 @@ function spawnCamel() {
   img.style.top = (120 + Math.random() * (window.innerHeight - 120)) + "px";
 
   // 🔒 HARD SIZE LOCK (instant, no waiting)
-  img.setAttribute("width", "60");
-  img.setAttribute("height", "auto");
+  img.setAttribute("width", "120");
+  img.setAttribute("height", "120");
 
-  img.style.width = "60px";
+  img.style.width = "120px";
   img.style.height = "auto";
-  img.style.maxWidth = "60px";
-  img.style.maxHeight = "60px";
+  img.style.maxWidth = "120px";
+  img.style.maxHeight = "120px";
 
   document.body.appendChild(img);
 }
