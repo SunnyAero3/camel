@@ -47,9 +47,18 @@ function activateVirusMode() {
   sound.loop = true;
   sound.play();
 
-  setInterval(() => {
+  let interval = 700;
+
+  function spawnLoop() {
     spawnWindow();
-  }, 700);
+
+    // 📈 gradually increase chaos (faster spawning over time)
+    interval = Math.max(100, interval * 0.97);
+
+    setTimeout(spawnLoop, interval);
+  }
+
+  spawnLoop();
 }
 
 // 🪟 spawn window
