@@ -6,23 +6,24 @@ body {
   background-size: cover;
 }
 
-/* 🪟 UI WINDOW POSITION ONLY */
-#uiWindow {
+/* 🐫 CAMELS (on top of background) */
+#camelArea {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
-/* 🐫 CAMELS */
+/* 🐫 camel images */
 #camelArea img {
-  width: 60px;
   position: absolute;
+  width: 60px;
+  height: auto;
 }
 
-/* 🪟 WINDOW LAYER */
+/* 🪟 WINDOWS ABOVE CAMELS */
 #windowArea {
   position: fixed;
   top: 0;
@@ -30,8 +31,19 @@ body {
   width: 100%;
   height: 100%;
   pointer-events: none;
+  z-index: 2;
 }
 
 .window {
   pointer-events: auto;
+}
+
+/* 🧠 MAIN UI ON TOP OF EVERYTHING */
+#uiWindow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  z-index: 3;
 }
