@@ -2,25 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Camel Generator</title>
+  <title>Camel OS</title>
 
   <link rel="stylesheet" href="https://unpkg.com/7.css">
-
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <h1>🐫 Camel Generator</h1>
+  <!-- 🪟 MAIN CONTROL WINDOW (CENTER FLOAT) -->
+  <div id="uiWindow" class="window active">
+    <div class="title-bar">
+      <div class="title-bar-text">🐫 Camel Generator</div>
+    </div>
 
-  <button id="spawnBtn">Generate Camel</button>
+    <div class="window-body">
+      <button id="spawnBtn">Generate Camel</button>
+      <div id="counter">Camels: 0</div>
+    </div>
+  </div>
 
-  <div id="counter">Camels: 0</div>
-
+  <!-- 🐫 CAMELS -->
   <div id="camelArea"></div>
 
+  <!-- 🪟 WINDOWS -->
   <div id="windowArea"></div>
 
-  <audio id="sound" src="sound.mp3" loop></audio>
+  <!-- 🔊 SOUND -->
+  <audio id="sound" src="sound.mp3"></audio>
 
   <script src="script.js"></script>
 </body>
