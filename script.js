@@ -2,12 +2,10 @@ let count = 0;
 let virusMode = false;
 
 const btn = document.getElementById("spawnBtn");
-const area = document.getElementById("camelArea");
 const counter = document.getElementById("counter");
-const windowArea = document.getElementById("windowArea");
 const sound = document.getElementById("sound");
 
-// 🐫 camel generator
+// 🐫 camel spawn button
 btn.onclick = () => {
   spawnCamel();
 
@@ -19,11 +17,15 @@ btn.onclick = () => {
   }
 };
 
-// 🐫 clean camel spawn
+// 🐫 camel spawn
 function spawnCamel() {
   const img = document.createElement("img");
   img.src = "camel.png";
-  area.appendChild(img);
+
+  img.style.left = Math.random() * window.innerWidth + "px";
+  img.style.top = (120 + Math.random() * (window.innerHeight - 120)) + "px";
+
+  document.body.appendChild(img);
 }
 
 // 💀 virus mode
@@ -39,7 +41,7 @@ function activateVirusMode() {
   }, 700);
 }
 
-// 🪟 popup windows
+// 🪟 windows
 function spawnWindow() {
   const win = document.createElement("div");
   win.className = "window active";
@@ -64,7 +66,6 @@ function spawnWindow() {
 
   const closeBtn = win.querySelector("button");
 
-  // 💥 close = +6 windows
   closeBtn.onclick = () => {
     win.remove();
 
@@ -73,12 +74,12 @@ function spawnWindow() {
     }
   };
 
-  windowArea.appendChild(win);
+  document.getElementById("windowArea").appendChild(win);
 
   enableDrag(win);
 }
 
-// 🖱️ draggable windows
+// 🖱️ drag system (still needed)
 function enableDrag(el) {
   const titleBar = el.querySelector(".title-bar");
 
@@ -88,7 +89,7 @@ function enableDrag(el) {
 
   titleBar.style.cursor = "grab";
 
-  titleBar.onmousedown = (e) => {
+  titleBar.addEventListener("mousedown", (e) => {
     isDragging = true;
 
     const rect = el.getBoundingClientRect();
@@ -96,17 +97,17 @@ function enableDrag(el) {
     offsetY = e.clientY - rect.top;
 
     titleBar.style.cursor = "grabbing";
-  };
+  });
 
-  document.onmouseup = () => {
+  document.addEventListener("mouseup", () => {
     isDragging = false;
     titleBar.style.cursor = "grab";
-  };
+  });
 
-  document.onmousemove = (e) => {
+  document.addEventListener("mousemove", (e) => {
     if (!isDragging) return;
 
     el.style.left = (e.clientX - offsetX) + "px";
     el.style.top = (e.clientY - offsetY) + "px";
-  };
+  });
 }
