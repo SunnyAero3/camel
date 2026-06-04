@@ -63,7 +63,7 @@ function spawnWindow() {
 
   win.innerHTML = `
     <div class="title-bar">
-      <div class="title-bar-text">YOU ARE AN IDIOT</div>
+      <div class="title-bar-text">Camel.exe</div>
       <div class="title-bar-controls">
         <button aria-label="Close"></button>
       </div>
