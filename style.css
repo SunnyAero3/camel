@@ -6,7 +6,7 @@ body {
   background-size: cover;
 }
 
-/* 🪟 CENTER FLOAT UI WINDOW */
+/* 🪟 UI WINDOW POSITION ONLY */
 #uiWindow {
   position: fixed;
   top: 50%;
@@ -34,22 +34,4 @@ body {
 
 .window {
   pointer-events: auto;
-
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-
-  border-radius: 8px;
-}
-
-.title-bar {
-  background: linear-gradient(
-    to bottom,
-    rgba(120, 180, 255, 0.9),
-    rgba(60, 120, 220, 0.9)
-  );
-  color: white;
 }
