@@ -12,7 +12,7 @@ btn.onclick = () => {
   count++;
   counter.innerText = "Camels: " + count;
 
-  if (count === 15 && !virusMode) {
+  if (count === 10 && !virusMode) {
     activateVirusMode();
   }
 };
