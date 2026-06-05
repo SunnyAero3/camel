@@ -17,17 +17,15 @@ btn.onclick = () => {
   }
 };
 
-// 🐫 FAST camel spawn (NO onload, NO delay, NO issues)
+// 🐫 FAST camel spawn (UNCHANGED LOGIC)
 function spawnCamel() {
   const img = document.createElement("img");
   img.src = "camel.png";
 
-  // 🧠 instant position
   img.style.position = "absolute";
   img.style.left = Math.random() * window.innerWidth + "px";
   img.style.top = (120 + Math.random() * (window.innerHeight - 120)) + "px";
 
-  // 🔒 HARD SIZE LOCK (instant, no waiting)
   img.setAttribute("width", "120");
   img.setAttribute("height", "120");
 
@@ -39,7 +37,7 @@ function spawnCamel() {
   document.body.appendChild(img);
 }
 
-// 💀 virus mode
+// 💀 virus mode (UNCHANGED)
 function activateVirusMode() {
   virusMode = true;
 
@@ -51,20 +49,19 @@ function activateVirusMode() {
 
   function spawnLoop() {
     spawnWindow();
-
-    // 📈 gradually increase chaos (faster spawning over time)
     interval = Math.max(100, interval * 0.97);
-
     setTimeout(spawnLoop, interval);
   }
 
   spawnLoop();
 }
 
-// 🪟 spawn window
+// 🪟 spawn window (ONLY AERO FIX)
 function spawnWindow() {
   const win = document.createElement("div");
-  win.className = "window active";
+
+  // 💎 REQUIRED FOR 7.CSS AERO
+  win.className = "window glass active";
 
   win.style.position = "absolute";
   win.style.left = Math.random() * (window.innerWidth - 250) + "px";
@@ -73,18 +70,19 @@ function spawnWindow() {
   win.innerHTML = `
     <div class="title-bar">
       <div class="title-bar-text">Camel.exe</div>
+
       <div class="title-bar-controls">
         <button aria-label="Close"></button>
       </div>
     </div>
 
-    <div class="window-body">
+    <div class="window-body has-space">
       <img src="camel.png" style="width:120px; display:block; margin:auto;" />
       <p style="text-align:center;">camel.exe has taken over</p>
     </div>
   `;
 
-  const closeBtn = win.querySelector("button");
+  const closeBtn = win.querySelector('[aria-label="Close"]');
 
   closeBtn.onclick = () => {
     win.remove();
@@ -99,7 +97,7 @@ function spawnWindow() {
   enableDrag(win);
 }
 
-// 🖱️ drag system
+// 🖱️ drag system (UNCHANGED)
 function enableDrag(el) {
   const titleBar = el.querySelector(".title-bar");
 
