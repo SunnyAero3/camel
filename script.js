@@ -1,11 +1,26 @@
 let count = 0;
 let virusMode = false;
+let windowsPaused = false;
 const btn = document.getElementById("spawnBtn");
 const counter = document.getElementById("counter");
 const sound = document.getElementById("sound");
+const clearBtn = document.getElementById("clearBtn");
+const toggleBtn = document.getElementById("toggleBtn");
 
 // track all bouncing windows
 const bouncingWindows = [];
+
+// clear all windows
+clearBtn.onclick = () => {
+  document.querySelectorAll("#windowArea .window").forEach(w => w.remove());
+  bouncingWindows.length = 0;
+};
+
+// stop/start spawning
+toggleBtn.onclick = () => {
+  windowsPaused = !windowsPaused;
+  toggleBtn.textContent = "Stop/Start Windows";
+};
 
 // animation loop
 function animateWindows() {
@@ -58,7 +73,7 @@ function activateVirusMode() {
   sound.play();
   let interval = 700;
   function spawnLoop() {
-    spawnWindow();
+    if (!windowsPaused) spawnWindow();
     interval = Math.max(100, interval * 0.97);
     setTimeout(spawnLoop, interval);
   }
@@ -99,7 +114,9 @@ function spawnWindow() {
     const idx = bouncingWindows.findIndex(w => w.el === win);
     if (idx !== -1) bouncingWindows.splice(idx, 1);
     win.remove();
-    for (let i = 0; i < 6; i++) spawnWindow();
+    if (!windowsPaused) {
+      for (let i = 0; i < 6; i++) spawnWindow();
+    }
   };
 
   const minimizeBtn = win.querySelector('[aria-label="Minimize"]');
