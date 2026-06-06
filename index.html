@@ -3,49 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <title>Camel</title>
-
   <link rel="icon" type="image/png" href="camel.png">
-
-  <!-- 7.css base -->
   <link rel="stylesheet" href="https://unpkg.com/7.css">
-
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-  <!-- 🌫️ REQUIRED BACKGROUND WRAPPER (for blur effect to work) -->
   <div class="background">
-
-    <!-- 🪟 MAIN CONTROL WINDOW (AERO GLASS) -->
     <div id="uiWindow" class="window glass active" style="max-width: 300px;">
-      
       <div class="title-bar">
         <div class="title-bar-text">Camel Generator</div>
-        
         <div class="title-bar-controls">
           <button aria-label="Minimize"></button>
           <button aria-label="Close"></button>
         </div>
       </div>
-
       <div class="window-body has-space">
-        <button id="spawnBtn">Generate Camel</button>
+        <div style="display:flex; gap:6px;">
+          <button id="spawnBtn">Generate Camel</button>
+          <a href="camel.exe" download><button>Download camel.exe</button></a>
+        </div>
         <div id="counter">Camels: 0</div>
       </div>
-
     </div>
-
   </div>
-
-  <!-- 🐫 CAMELS -->
   <div id="camelArea"></div>
-
-  <!-- 🪟 WINDOWS (also should be glass if you spawn them) -->
   <div id="windowArea"></div>
-
   <audio id="sound" src="sound.mp3"></audio>
-
   <script src="script.js"></script>
 </body>
 </html>
