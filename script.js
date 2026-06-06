@@ -1,56 +1,65 @@
 let count = 0;
 let virusMode = false;
 let windowsPaused = false;
+let movingPaused = false;
+let musicPlaying = true;
+
 const btn = document.getElementById("spawnBtn");
 const counter = document.getElementById("counter");
 const sound = document.getElementById("sound");
 const clearBtn = document.getElementById("clearBtn");
 const toggleBtn = document.getElementById("toggleBtn");
+const musicBtn = document.getElementById("musicBtn");
+const moveBtn = document.getElementById("moveBtn");
 
-// track all bouncing windows
 const bouncingWindows = [];
 
-// clear all windows
 clearBtn.onclick = () => {
   document.querySelectorAll("#windowArea .window").forEach(w => w.remove());
   bouncingWindows.length = 0;
 };
 
-// stop/start spawning
 toggleBtn.onclick = () => {
   windowsPaused = !windowsPaused;
-  toggleBtn.textContent = "Stop/Start Windows";
 };
 
-// animation loop
+musicBtn.onclick = () => {
+  if (musicPlaying) { sound.pause(); musicBtn.textContent = "Start Music"; }
+  else { sound.play(); musicBtn.textContent = "Stop Music"; }
+  musicPlaying = !musicPlaying;
+};
+
+moveBtn.onclick = () => {
+  movingPaused = !movingPaused;
+};
+
 function animateWindows() {
-  for (const w of bouncingWindows) {
-    w.x += w.vx;
-    w.y += w.vy;
+  if (!movingPaused) {
+    for (const w of bouncingWindows) {
+      w.x += w.vx;
+      w.y += w.vy;
 
-    const maxX = window.innerWidth - w.el.offsetWidth;
-    const maxY = window.innerHeight - w.el.offsetHeight;
+      const maxX = window.innerWidth - w.el.offsetWidth;
+      const maxY = window.innerHeight - w.el.offsetHeight;
 
-    if (w.x < 0)    { w.x = 0;    w.vx = Math.abs(w.vx); }
-    if (w.y < 0)    { w.y = 0;    w.vy = Math.abs(w.vy); }
-    if (w.x > maxX) { w.x = maxX; w.vx = -Math.abs(w.vx); }
-    if (w.y > maxY) { w.y = maxY; w.vy = -Math.abs(w.vy); }
+      if (w.x < 0)    { w.x = 0;    w.vx = Math.abs(w.vx); }
+      if (w.y < 0)    { w.y = 0;    w.vy = Math.abs(w.vy); }
+      if (w.x > maxX) { w.x = maxX; w.vx = -Math.abs(w.vx); }
+      if (w.y > maxY) { w.y = maxY; w.vy = -Math.abs(w.vy); }
 
-    w.el.style.left = w.x + "px";
-    w.el.style.top  = w.y + "px";
+      w.el.style.left = w.x + "px";
+      w.el.style.top  = w.y + "px";
+    }
   }
   requestAnimationFrame(animateWindows);
 }
 animateWindows();
 
-// 🐫 generate camel
 btn.onclick = () => {
   spawnCamel();
   count++;
   counter.innerText = "Camels: " + count;
-  if (count === 10 && !virusMode) {
-    activateVirusMode();
-  }
+  if (count === 10 && !virusMode) activateVirusMode();
 };
 
 function spawnCamel() {
@@ -99,7 +108,6 @@ function spawnWindow() {
     <div class="title-bar" style="background-attachment: local;">
       <div class="title-bar-text">Camel.exe</div>
       <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
         <button aria-label="Close"></button>
       </div>
     </div>
@@ -119,30 +127,24 @@ function spawnWindow() {
     }
   };
 
-  const minimizeBtn = win.querySelector('[aria-label="Minimize"]');
-  minimizeBtn.onclick = () => {
-    const body = win.querySelector(".window-body");
-    body.style.display = body.style.display === "none" ? "" : "none";
-  };
-
   document.getElementById("windowArea").appendChild(win);
 
   const bounceObj = { el: win, x: startX, y: startY, vx: randSpeed(), vy: randSpeed() };
   bouncingWindows.push(bounceObj);
-
   enableDrag(win, bounceObj);
 }
 
 function enableDrag(el, bounceObj) {
   const titleBar = el.querySelector(".title-bar");
   let isDragging = false;
-  let offsetX = 0;
-  let offsetY = 0;
+  let offsetX = 0, offsetY = 0;
 
   titleBar.style.cursor = "grab";
 
   titleBar.addEventListener("mousedown", (e) => {
     isDragging = true;
+    bounceObj.savedVx = bounceObj.vx;
+    bounceObj.savedVy = bounceObj.vy;
     bounceObj.vx = 0;
     bounceObj.vy = 0;
     const rect = el.getBoundingClientRect();
@@ -155,8 +157,8 @@ function enableDrag(el, bounceObj) {
     if (!isDragging) return;
     isDragging = false;
     titleBar.style.cursor = "grab";
-    bounceObj.vx = randSpeed();
-    bounceObj.vy = randSpeed();
+    bounceObj.vx = movingPaused ? 0 : randSpeed();
+    bounceObj.vy = movingPaused ? 0 : randSpeed();
   });
 
   document.addEventListener("mousemove", (e) => {
