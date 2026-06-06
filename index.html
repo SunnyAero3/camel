@@ -17,7 +17,7 @@
           <button aria-label="Close"></button>
         </div>
       </div>
-      <div class="window-body has-space">
+      <div class="window-body has-space" style="max-height: 220px; overflow-y: auto;">
         <div style="display:flex; gap:6px;">
           <button id="spawnBtn">Generate Camel</button>
           <a href="camel.exe" download><button>Download camel.exe</button></a>
@@ -27,9 +27,10 @@
           <button id="toggleBtn">Stop/Start Windows</button>
         </div>
         <div style="display:flex; gap:6px; margin-top:6px;">
-          <button id="musicBtn">Stop Music</button>
+          <button id="musicBtn">Stop/Start Music</button>
+          <button id="moveBtn">Stop/Start Moving</button>
         </div>
-        <div id="counter">Camels: 0</div>
+        <div id="counter" style="margin-top:6px;">Camels: 0</div>
       </div>
     </div>
   </div>
