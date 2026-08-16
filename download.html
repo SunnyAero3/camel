@@ -6,6 +6,42 @@
     <title>Camel.exe Download</title>
     <link rel="stylesheet" href="https://unpkg.com/7.css">
     <link rel="stylesheet" href="download.css">
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        .background {
+            /* Full screen container */
+            width: 100vw;
+            min-height: 100vh;
+            
+            /* Center the download window on screen */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            /* Set background image or wallpaper (change 'wallpaper.jpg' to your image file) */
+            background: url('wallpaper.jpg') no-repeat center center fixed;
+            background-size: cover;
+
+            /* Fallback gradient background if image isn't loaded */
+            background-color: #3a6ea5; 
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .footer {
+            font-size: 11px;
+            margin-top: 15px;
+            color: #222;
+        }
+    </style>
 </head>
 <body>
 <div class="background">
